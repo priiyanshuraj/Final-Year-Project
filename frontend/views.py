@@ -1,4 +1,5 @@
-from django.shortcuts import render
+import json
+from django.shortcuts import render, redirect  
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Count, Avg, F
@@ -10,6 +11,7 @@ from insights.models import BudgetInsight, SavingsGoal
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import redirect
+
 
 
 @login_required
@@ -86,7 +88,7 @@ def financial_summary(request):
         'savings_progress': savings_progress,
     }
 
-    return render(request, 'dashboard.html', context) 
+    return render(request, 'frontend/dashboard.html', context) 
 
 
 

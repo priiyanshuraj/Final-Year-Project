@@ -49,13 +49,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_celery_beat',
     'users',
-    #'transactions',
-   # 'payments',
+    'transactions',
+    'payments',
     'group_expenses',
-   # 'notifications',
-   # "insights",
-   # 'admin_dashboard',
-   # 'frontend',
+    'notifications',
+    'insights',
+    'admin_dashboard',
+    'frontend',
   
 ]
 

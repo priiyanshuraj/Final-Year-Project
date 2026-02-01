@@ -470,7 +470,8 @@ def user_login(request):
 
 @login_required
 def user_dashboard(request):
-    return render(request, "user_dashboard/index.html")
+    # return render(request, "user_dashboard/index.html")
+    return redirect('financial_summary')
 
 @login_required
 def admin_logout(request):
