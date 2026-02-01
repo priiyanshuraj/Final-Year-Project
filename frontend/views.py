@@ -48,7 +48,7 @@ def dashboard_stats(request):
         'average_roi': average_roi,
     }
 
-    return render(request, 'homepage.html', context)
+    return render(request, 'frontend/homepage.html', context)
 
 
 @login_required
@@ -139,7 +139,80 @@ def spending_analysis(request):
         "monthly_expenses": monthly_totals,
     }
 
-    return render(request, 'dashboard.html', {"context": json.dumps(context)})
+    return render(request, 'frontend/dashboard.html', {"context": json.dumps(context)})
 
 
 
+
+
+
+
+# from django.shortcuts import render, redirect  
+# from django.http import JsonResponse
+# from django.contrib.auth.decorators import login_required
+# from django.db.models import Sum, Count, Avg
+# from datetime import datetime, timedelta
+# import json
+
+# # Import your models
+# from users.models import User
+# from transactions.models import Transaction, Category
+# from group_expenses.models import Settlement
+# from insights.models import BudgetInsight, SavingsGoal
+
+# @login_required
+# def dashboard_stats(request):
+#     # ... (Your existing logic is fine) ...
+#     # Placeholder logic for stats if needed, or keep your calculations
+#     active_users = User.objects.count()
+    
+#     context = {
+#         'active_users': active_users,
+#         # Add other variables here...
+#     }
+    
+#     # FIX 1: Point to the correct folder 'frontend/'
+#     return render(request, 'frontend/homepage.html', context)
+
+
+# @login_required
+# def financial_summary(request):
+#     user = request.user  
+#     today = datetime.today()
+#     current_month = today.month
+#     last_month = (today - timedelta(days=30)).month
+
+#     # Calculations
+#     total_balance = Transaction.objects.filter(user=user).aggregate(Sum('amount'))['amount__sum'] or 0
+#     monthly_income = Transaction.objects.filter(user=user, amount__gt=0, date__month=current_month).aggregate(Sum('amount'))['amount__sum'] or 0
+#     monthly_expenses = Transaction.objects.filter(user=user, amount__lt=0, date__month=current_month).aggregate(Sum('amount'))['amount__sum'] or 0
+    
+#     # Savings
+#     total_goal = SavingsGoal.objects.filter(user=user).aggregate(Sum('target_amount'))['target_amount__sum'] or 1
+#     total_savings = SavingsGoal.objects.filter(user=user).aggregate(Sum('saved_amount'))['saved_amount__sum'] or 0
+#     savings_progress = round((total_savings / total_goal) * 100, 2) if total_goal else 0
+
+#     context = {
+#         'total_balance': total_balance,
+#         'monthly_income': monthly_income,
+#         'monthly_expenses': monthly_expenses,
+#         'savings_progress': savings_progress,
+#     }
+
+#     # FIX 2: Ensure this is 'frontend/dashboard.html' and NO json.dumps
+#     return render(request, 'frontend/dashboard.html', context) 
+
+
+# def spending_analysis(request):
+#     user_id = request.user.id
+    
+#     # ... (Your existing Chart logic) ...
+#     # For now, let's send basic data to prevent crashes
+#     context = {
+#         "dates": [],
+#         "income": [],
+#         "expenses": [],
+#     }
+
+#     # FIX 3: Point to 'frontend/dashboard.html' and remove json.dumps
+#     return render(request, 'frontend/dashboard.html', context)

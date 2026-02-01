@@ -9,7 +9,7 @@ from .views import BudgetView, BudgetHistoryView
 urlpatterns = [
     path('process-voice-entry/', process_voice_entry, name='process_voice_entry'),
     path('confirm-voice-transaction/', confirm_voice_transaction, name='confirm_voice_transaction'),
-    path('get-transactions/', get_transactions, name='get_transactions'),
+    path('get-transactions/', get_transactions, name='get-transactions'),
     path('api/upcoming-bills/', upcoming_bills, name='upcoming-bills'),
 
     path('export-transactions-csv/', export_transactions_csv, name='export_transactions_csv'),
@@ -18,5 +18,6 @@ urlpatterns = [
     path('api/currency-convert/', CurrencyConverter.as_view(), name='currency-converter'),
     path('budget/<uuid:user_id>/', BudgetView.as_view(), name='budget'),
     path('budget-history/<uuid:user_id>/', BudgetHistoryView.as_view(), name='budget-history'),
+    path('add/', add_transaction, name='add_transaction'),
 
 ]

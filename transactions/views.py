@@ -56,6 +56,11 @@ def confirm_voice_transaction(request):
 
     return Response({"message": "Transaction saved successfully!", "transaction_id": transaction.id})
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_transaction(request):
+    return render(request, 'transactions/add_transaction.html')
+
 
 @api_view(['GET'])
 def get_transactions(request):
@@ -261,7 +266,7 @@ class BudgetView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return TransactionsBudget.objects.filter(user_id=self.kwargs['user_id'])
+        return Budget.objects.filter(user_id=self.kwargs['user_id'])
 
 # Fetch budget history
 class BudgetHistoryView(generics.ListAPIView):
@@ -269,7 +274,7 @@ class BudgetHistoryView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return TransactionsBudgetHistory.objects.filter(
+        return BudgetHistory.objects.filter(
             user_id=self.kwargs['user_id'], 
             month=self.request.query_params.get('month'), 
             year=self.request.query_params.get('year')
